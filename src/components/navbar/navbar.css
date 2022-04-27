@@ -1,0 +1,8 @@
+.active{
+    color: rgb(163, 156, 156);
+}
+
+.notActive{
+    text-decoration: none;
+    color:white;
+}

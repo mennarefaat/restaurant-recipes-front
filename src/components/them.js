@@ -13,11 +13,11 @@ const getDesignTokens = (mode) => ({
    },
    ...(mode === 'dark' && {
      background: {
-       paper: deepOrange[900],
+       paper: grey[400],
      },
    }),
    ...(mode === 'dark' && {
-     primary: blue,
+     primary: blue[900],
      secondary: pink,
    }),
    text: {
