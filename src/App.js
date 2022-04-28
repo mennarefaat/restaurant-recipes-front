@@ -7,7 +7,7 @@ import Router from "./Routes/routes"
 
 
 
-const darkModeTheme = createTheme(getDesignTokens('dark'));
+const darkModeTheme = createTheme(getDesignTokens('light'));
 
 
 function App() {

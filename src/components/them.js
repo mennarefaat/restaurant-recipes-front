@@ -1,5 +1,5 @@
 
-import { amber, deepOrange,blue, pink, grey } from '@mui/material/colors';
+import { amber, deepOrange,blue, pink, grey, teal } from '@mui/material/colors';
 
 
 const getDesignTokens = (mode) => ({
@@ -8,7 +8,7 @@ const getDesignTokens = (mode) => ({
    primary: {
      ...amber,
      ...(mode === 'dark' && {
-       main: amber[300],
+       main: teal[300],
      }),
    },
    ...(mode === 'dark' && {
@@ -20,6 +20,7 @@ const getDesignTokens = (mode) => ({
      primary: blue[900],
      secondary: pink,
    }),
+   
    text: {
      ...(mode === 'light'
        ? {
