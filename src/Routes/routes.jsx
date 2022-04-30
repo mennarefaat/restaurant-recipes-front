@@ -9,6 +9,8 @@ import {
 import NavBar from "../components/navbar/Navbar";
 import Recieps from "../pages/Recipes"
 import RecipeDetail from "../pages/RecipeDetaile"
+import AddNewRecipe from "../pages/AddRecipe";
+import EditRecipe from "../pages/EditRecipe";
 
 const Router = () => {
   return (
@@ -19,8 +21,8 @@ const Router = () => {
           <Route path="/" />
           <Route path="/recipes"  element={<Recieps/>}/>
           <Route path="/recipes/:id" element={<RecipeDetail/>}/>
-          <Route path="/recipes/edit/:id" />
-          <Route path="/recipes/add" />
+          <Route path="/recipes/edit/:id" element={<EditRecipe/>}/>
+          <Route path="/recipes/add" element={<AddNewRecipe/>}/>
         </Routes>
       </BrowserRouter>
     </>

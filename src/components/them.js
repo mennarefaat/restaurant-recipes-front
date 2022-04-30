@@ -7,7 +7,7 @@ const getDesignTokens = (mode) => ({
    mode,
    primary: {
      ...amber,
-     ...(mode === 'dark' && {
+     ...(mode === 'light' && {
        main: teal[300],
      }),
    },

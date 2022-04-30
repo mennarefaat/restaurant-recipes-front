@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useFormik } from "formik";
-// import * as yup from 'yup';
+import * as yup from "yup";
 import { Button, Input } from "@mui/material";
 import { TextField } from "@mui/material";
-import { validationSchema } from "./validation";
-import CheckIcon from "@mui/icons-material/Check";
 import { Box } from "@mui/system";
 
-export const WithMaterialUI = () => {
+export const EditForm = ({ ingrediants }) => {
+    const [newIngred, setNewIngred]=useState(ingrediants)
   const formik = useFormik({
     initialValues: {
-      title: "",
+      title: "mmm",
       recipe: "",
-      ingrediant: "",
-      ingrediants: [],
+      ingrediants: ingrediants,
     },
-    validationSchema: validationSchema,
     onSubmit: (values) => {
+      console.log(values);
       alert(JSON.stringify(values, null, 2));
     },
   });
-
-  const addGrediant = () => {
-    console.log(formik.values.ingrediants, formik.values.ingrediant);
-    if (formik.values.ingrediant)
-      formik.values.ingrediants.push(formik.values.ingrediant);
+  const handleChange = (e, index) => {
+    formik.values.ingrediants.splice(index, 1, e);
+    const ingg=[...newIngred]
+    ingg.splice(index,1, e)
+    setNewIngred(ingg)
+    console.log(formik.values.ingrediants);
   };
 
   return (
@@ -46,30 +45,34 @@ export const WithMaterialUI = () => {
           id="recipe"
           name="recipe"
           label="recipe"
-          type="recipe"
           value={formik.values.recipe}
           onChange={formik.handleChange}
           error={formik.touched.recipe && Boolean(formik.errors.recipe)}
           helperText={formik.touched.recipe && formik.errors.recipe}
         />
-        <ol>
-          {formik.values?.ingrediants?.map((ingred, index) => {
-            return <li key={index}>{ingred}</li>;
-          })}
-        </ol>
-        <TextField
-          fullWidth
-          id="ingrediant"
-          name="ingrediant"
-          label="ingrediant"
-          type="ingrediant"
-          value={formik.values.ingrediant}
-          onChange={formik.handleChange}
-          error={formik.touched.ingrediant && Boolean(formik.errors.ingrediant)}
-          helperText={formik.touched.ingrediant && formik.errors.ingrediant}
-        />
         <Box>
-          <CheckIcon onClick={addGrediant} style={{ cursor: "pointer" }} />
+          {newIngred?.map((ingred, index) => {
+            return (
+              <TextField
+                id={ingred}
+                name={ingred}
+                key={index}
+                fullWidth
+                type="text"
+                value={formik.values.ingrediants[index]}
+                onChange={(event) => {
+                  handleChange(event.target.value, index);
+                }}
+                error={
+                  formik.touched.ingrediants &&
+                  Boolean(formik.errors.ingrediants)
+                }
+                helperText={
+                  formik.touched.ingrediants && formik.errors.ingrediants
+                }
+              />
+            );
+          })}
         </Box>
         <Input type="file" />
         <Button color="primary" variant="contained" fullWidth type="submit">
