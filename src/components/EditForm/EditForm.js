@@ -5,15 +5,19 @@ import * as yup from "yup";
 import { Button, Input } from "@mui/material";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { validationSchema } from "./Validation";
+
 
 export const EditForm = ({ ingrediants }) => {
     const [newIngred, setNewIngred]=useState(ingrediants)
   const formik = useFormik({
     initialValues: {
-      title: "mmm",
+      title: "",
       recipe: "",
       ingrediants: ingrediants,
     },
+    validationSchema: validationSchema,
+
     onSubmit: (values) => {
       console.log(values);
       alert(JSON.stringify(values, null, 2));
@@ -21,9 +25,9 @@ export const EditForm = ({ ingrediants }) => {
   });
   const handleChange = (e, index) => {
     formik.values.ingrediants.splice(index, 1, e);
-    const ingg=[...newIngred]
-    ingg.splice(index,1, e)
-    setNewIngred(ingg)
+    const ingredianArray=[...newIngred]
+    ingredianArray.splice(index,1, e)
+    setNewIngred(ingredianArray)
     console.log(formik.values.ingrediants);
   };
 
