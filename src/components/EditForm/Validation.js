@@ -8,6 +8,6 @@ export const validationSchema = yup.object({
     .required("Recipe is required"),
 
   ingrediants: yup
-    .array()
+    .array().min(1)
     .required("ingrediants is required"),
 });
