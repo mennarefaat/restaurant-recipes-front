@@ -4,19 +4,20 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipes } from "../store/actions/recipes";
+import { Stack } from "@mui/material";
 
 export default function Recieps() {
   const dispatch = useDispatch();
-  const recieps = useSelector((state) => console.log(state));
+  const recipes = useSelector((state) => state.recipes.list);
   useEffect(() => {
     dispatch(getRecipes());
-    console.log("oook")
-  },[]);
+  }, [dispatch]);
 
   return (
-    <Grid margin={"70px"}>
-      {recieps?.map((recipe) => {
-        return <SmallCard />;
+    <Grid display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={2} margin="30px">
+      {console.log(recipes)}
+      {recipes?.map((recipe) => {
+        return <SmallCard title={recipe.title} image={recipe.image} />;
       })}
     </Grid>
   );
