@@ -1,46 +1,58 @@
-import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-export default function DetailedCard() {
-  const theme = useTheme();
+export default function DetailedCard({ recipe, deleteRecipe }) {
 
   return (
-    <Card sx={{ display: 'flex' }}>
+    <Card sx={{ display: "flex" }}>
       <CardMedia
         component="img"
         sx={{ width: 151 }}
         image="/static/images/cards/live-from-space.jpg"
-        alt="Live from space album cover"
+        alt={recipe.title}
       />
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            Live From Space
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
+          <Typography component="div" variant="h4">
+            {recipe?.title}
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Mac Miller
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            <ol>
+              {recipe?.ingredients?.map((ingred, index) => {
+                return <li key={index}>{ingred}</li>;
+              })}
+            </ol>
           </Typography>
         </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
+        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
+          <Typography component="div" variant="h7">
+            {recipe?.recipe}
+          </Typography>
         </Box>
+        <Typography style={{ display: "block" }}>
+          <Link
+            to={`/recipes/edit/${recipe._id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Button>Edit</Button>
+          </Link>
+          <Button
+            onClick={(()=>{deleteRecipe(recipe._id)})}
+          >
+            Delete
+          </Button>
+        </Typography>
       </Box>
     </Card>
   );

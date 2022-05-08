@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useFormik } from "formik";
 // import * as yup from 'yup';
@@ -8,7 +8,8 @@ import { validationSchema } from "./validation";
 import CheckIcon from "@mui/icons-material/Check";
 import { Box } from "@mui/system";
 
-export const WithMaterialUI = () => {
+export const WithMaterialUI = ({addRecipe}) => {
+  const [file, setFile]=useState("")
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -71,9 +72,11 @@ export const WithMaterialUI = () => {
         <Box>
           <CheckIcon onClick={addGrediant} style={{ cursor: "pointer" }} />
         </Box>
-        <Input type="file" />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
+        <Input type="file"
+              onChange={(e)=>{setFile(e?.target?.files[0])}}
+        />
+        <Button color="primary" variant="contained" fullWidth type="submit" onClick={()=>{addRecipe({...formik.values,file})}}>
+          Add
         </Button>
       </form>
     </div>

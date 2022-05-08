@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getRecipes } from "../store/actions/recipes";
-import { Stack } from "@mui/material";
 
 export default function Recieps() {
   const dispatch = useDispatch();
@@ -14,10 +13,15 @@ export default function Recieps() {
   }, [dispatch]);
 
   return (
-    <Grid display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={2} margin="30px">
+    <Grid
+      display="grid"
+      gridTemplateColumns="repeat(4, 1fr)"
+      gap={2}
+      margin="30px"
+    >
       {console.log(recipes)}
       {recipes?.map((recipe) => {
-        return <SmallCard title={recipe.title} image={recipe.image} />;
+        return <SmallCard title={recipe.title} image={recipe.image} _id={recipe._id}/>;
       })}
     </Grid>
   );

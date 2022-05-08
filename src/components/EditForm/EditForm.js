@@ -8,12 +8,14 @@ import { Box } from "@mui/system";
 import { validationSchema } from "./Validation";
 
 
-export const EditForm = ({ ingrediants }) => {
+export const EditForm = ({ ingrediants,title,recipe,image,editRecipeHandle }) => {
     const [newIngred, setNewIngred]=useState(ingrediants)
+  const [file, setFile]=useState("")
+
   const formik = useFormik({
     initialValues: {
-      title: "",
-      recipe: "",
+      title: title,
+      recipe: recipe,
       ingrediants: ingrediants,
     },
     validationSchema: validationSchema,
@@ -78,8 +80,8 @@ export const EditForm = ({ ingrediants }) => {
             );
           })}
         </Box>
-        <Input type="file" />
-        <Button color="primary" variant="contained" fullWidth type="submit">
+        <Input type="file" onChange={(e)=>{setFile(e?.target?.files[0])}}/>
+        <Button color="primary" variant="contained" fullWidth type="submit" onClick={(()=>{editRecipeHandle({...formik.values,file})})}>
           Submit
         </Button>
       </form>
