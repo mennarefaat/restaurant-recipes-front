@@ -1,8 +1,6 @@
 import {
   Routes,
   Route,
-  Navigate,
-  Outlet,
   BrowserRouter,
 } from "react-router-dom";
 
@@ -11,6 +9,7 @@ import Recieps from "../pages/Recipes"
 import RecipeDetail from "../pages/RecipeDetaile"
 import AddNewRecipe from "../pages/AddRecipe";
 import EditRecipe from "../pages/EditRecipe";
+import Home from "../pages/home";
 
 const Router = () => {
   return (
@@ -18,7 +17,7 @@ const Router = () => {
       <BrowserRouter>
           <NavBar />
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Home/>}/>
           <Route path="/recipes"  element={<Recieps/>}/>
           <Route path="/recipes/:id" element={<RecipeDetail/>}/>
           <Route path="/recipes/edit/:id" element={<EditRecipe/>}/>

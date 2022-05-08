@@ -6,7 +6,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 export default function DetailedCard({ recipe, deleteRecipe }) {
 
@@ -28,11 +27,11 @@ export default function DetailedCard({ recipe, deleteRecipe }) {
             color="text.secondary"
             component="div"
           >
-            <ol>
+            <ul>
               {recipe?.ingredients?.map((ingred, index) => {
                 return <li key={index}>{ingred}</li>;
               })}
-            </ol>
+            </ul>
           </Typography>
         </CardContent>
         <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
